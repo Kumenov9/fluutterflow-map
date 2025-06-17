@@ -1,54 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>Demo Map</title>
   <meta charset="utf-8" />
-  <title>Sofia Depot Map</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Leaflet CSS -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  />
-
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
   <style>
-    html, body { height: 100%; margin: 0; padding: 0; }
-    #map { height: 100vh; width: 100vw; }
+    #map { height: 100vh; width: 100%; }
   </style>
 </head>
 <body>
   <div id="map"></div>
 
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
   <script>
-    // Initialize the map and center it in Sofia
-    var map = L.map('map').setView([42.6977, 23.3219], 13);
+    const map = L.map('map').setView([42.6977, 23.3219], 13);
 
-    // Use OpenStreetMap tiles
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18,
-      attribution: '&copy; OpenStreetMap contributors'
+      maxZoom: 19,
+      attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
-    // Add random depot locations in Sofia
     const locations = [
-      { lat: 42.6977, lng: 23.3219, name: 'Depot 1 - Center' },
-      { lat: 42.7050, lng: 23.3200, name: 'Depot 2 - Orlov Most' },
-      { lat: 42.6815, lng: 23.3101, name: 'Depot 3 - Krasno Selo' },
-      { lat: 42.6999, lng: 23.3402, name: 'Depot 4 - Poduyane' },
-      { lat: 42.7163, lng: 23.3021, name: 'Depot 5 - Nadezhda' },
-      { lat: 42.6867, lng: 23.3544, name: 'Depot 6 - Geo Milev' },
-      { lat: 42.6981, lng: 23.2856, name: 'Depot 7 - Lyulin' },
-      { lat: 42.6719, lng: 23.3285, name: 'Depot 8 - Lozenets' },
-      { lat: 42.7133, lng: 23.3264, name: 'Depot 9 - Hadji Dimitar' },
-      { lat: 42.6842, lng: 23.3450, name: 'Depot 10 - Mladost' },
+      { name: "Локация 1", lat: 42.6977, lng: 23.3219 },
+      { name: "Локация 2", lat: 42.6953, lng: 23.3254 },
+      { name: "Локация 3", lat: 42.7005, lng: 23.3180 },
+      { name: "Локация 4", lat: 42.7018, lng: 23.3302 },
+      { name: "Локация 5", lat: 42.6991, lng: 23.3124 },
+      { name: "Локация 6", lat: 42.6960, lng: 23.3195 },
+      { name: "Локация 7", lat: 42.7029, lng: 23.3233 },
+      { name: "Локация 8", lat: 42.6983, lng: 23.3289 },
+      { name: "Локация 9", lat: 42.6950, lng: 23.3311 },
+      { name: "Локация 10", lat: 42.7034, lng: 23.3167 },
     ];
 
     locations.forEach(loc => {
-      L.marker([loc.lat, loc.lng]).addTo(map)
-        .bindPopup(`<b>${loc.name}</b>`);
+      L.marker([loc.lat, loc.lng])
+        .addTo(map)
+        .bindPopup(`<b>${loc.name}</b><br><a href="https://www.google.com/maps?q=${loc.lat},${loc.lng}" target="_blank">Отвори в Google Maps</a>`);
     });
   </script>
 </body>
