@@ -46,9 +46,10 @@
     ];
 
     locations.forEach(loc => {
+      const gmapsLink = `https://maps.google.com/?q=${encodeURIComponent(loc.lat + "," + loc.lng)}`;
       L.marker([loc.lat, loc.lng])
         .addTo(map)
-        .bindPopup(`<b>${loc.name}</b><br><a href="https://www.google.com/maps?q=${loc.lat},${loc.lng}" target="_blank">Отвори в Google Maps</a>`);
+        .bindPopup(`<b>${loc.name}</b><br><a href="${gmapsLink}" target="_blank" rel="noopener noreferrer">Отвори в Google Maps</a>`);
     });
   </script>
 </body>
