@@ -45,22 +45,11 @@
       { name: "Локация 10", lat: 42.7034, lng: 23.3167 },
     ];
 
-    // Detect if device is mobile
-    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-
     locations.forEach(loc => {
-      let link;
-      if (isMobile) {
-        // Mobile: use geo: scheme to open Maps app directly
-        link = `geo:${loc.lat},${loc.lng}?q=${loc.lat},${loc.lng}(${encodeURIComponent(loc.name)})`;
-      } else {
-        // Desktop: use normal Google Maps link
-        link = `https://maps.google.com/?q=${loc.lat},${loc.lng}`;
-      }
-
+      const gmapsLink = `https://www.google.com/maps/search/?api=1&query=${loc.lat},${loc.lng}`;
       L.marker([loc.lat, loc.lng])
         .addTo(map)
-        .bindPopup(`<b>${loc.name}</b><br><a href="${link}" target="_blank" rel="noopener noreferrer">Отвори в Google Maps</a>`);
+        .bindPopup(`<b>${loc.name}</b><br><a href="${gmapsLink}" target="_blank" rel="noopener noreferrer">Отвори в Google Maps</a>`);
     });
   </script>
 </body>
