@@ -4,9 +4,7 @@
   <title>Demo Map</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
-
   <style>
     html, body {
       margin: 0;
@@ -14,10 +12,7 @@
       height: 100%;
       overflow: hidden;
     }
-    #map {
-      height: 100%;
-      width: 100%;
-    }
+    #map { height: 100%; width: 100%; }
     .map-link {
       color: #0078ff;
       text-decoration: underline;
@@ -50,12 +45,25 @@
       { name: "Локация 10", lat: 42.7034, lng: 23.3167 },
     ];
 
+    function openExternalMap(lat, lng) {
+      // Use official universal Maps link
+      const gmaps = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+      try {
+        // Force open externally
+        window.open(gmaps, '_blank', 'noopener,noreferrer');
+      } catch (e) {
+        alert('Моля, отворете страницата през външен браузър.');
+      }
+    }
+
     locations.forEach(loc => {
-      // Use the same working structure as your app list
-      const gmapsLink = `https://www.google.com/maps?q=${loc.lat},${loc.lng}`;
-      L.marker([loc.lat, loc.lng])
-        .addTo(map)
-        .bindPopup(`<b>${loc.name}</b><br><a href="${gmapsLink}" target="_blank" rel="noopener noreferrer">Отвори в Google Maps</a>`);
+      const marker = L.marker([loc.lat, loc.lng]).addTo(map);
+      marker.bindPopup(`
+        <b>${loc.name}</b><br>
+        <span class="map-link" onclick="openExternalMap(${loc.lat},${loc.lng})">
+          Отвори в Google Maps
+        </span>
+      `);
     });
   </script>
 </body>
