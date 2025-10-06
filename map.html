@@ -18,6 +18,11 @@
       height: 100%;
       width: 100%;
     }
+    .map-link {
+      color: #0078ff;
+      text-decoration: underline;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -45,11 +50,15 @@
       { name: "Локация 10", lat: 42.7034, lng: 23.3167 },
     ];
 
-    locations.forEach(loc => {
-      const gmapsLink = `https://www.google.com/maps/search/?api=1&query=${loc.lat},${loc.lng}`;
-      L.marker([loc.lat, loc.lng])
-        .addTo(map)
-        .bindPopup(`<b>${loc.name}</b><br><a href="${gmapsLink}" target="_blank" rel="noopener noreferrer">Отвори в Google Maps</a>`);
+    locations.forEach((loc, index) => {
+      const link = `https://www.google.com/maps/search/?api=1&query=${loc.lat},${loc.lng}`;
+      const marker = L.marker([loc.lat, loc.lng]).addTo(map);
+      marker.bindPopup(`
+        <b>${loc.name}</b><br>
+        <span class="map-link" onclick="window.open('${link}', '_system')">
+          Отвори в Google Maps
+        </span>
+      `);
     });
   </script>
 </body>
